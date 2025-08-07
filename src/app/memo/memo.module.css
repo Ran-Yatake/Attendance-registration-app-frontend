@@ -1,5 +1,5 @@
 .container {
-  max-width: 480px;
+  max-width: 600px;
   margin: 48px auto;
   padding: 32px;
   background: rgba(255,255,255,0.7);
@@ -19,30 +19,41 @@
   text-shadow: 0 2px 8px rgba(37,99,235,0.08);
 }
 
-.form {
-  display: flex;
-  flex-direction: column;
+.todaySection {
+  background: rgba(34, 197, 94, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  border-left: 4px solid #22c55e;
+}
+
+.todaySection h2 {
+  margin: 0 0 16px 0;
+  color: #16a34a;
+  font-size: 1.2rem;
+}
+
+.todayInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.todayInfo p {
+  margin: 4px 0;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.buttonSection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   margin-bottom: 36px;
 }
 
-.input {
-  padding: 14px 18px;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  font-size: 1.05rem;
-  background: #f7fafc;
-  transition: border 0.2s, box-shadow 0.2s;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-}
-.input:focus {
-  border-color: #2563eb;
-  box-shadow: 0 0 0 2px #90cdf4;
-  outline: none;
-}
-
 .button {
-  padding: 13px 0;
+  padding: 16px;
   background: linear-gradient(90deg, #2563eb 0%, #00bcd4 100%);
   color: #fff;
   border: none;
@@ -53,9 +64,26 @@
   box-shadow: 0 2px 12px rgba(37,99,235,0.10);
   transition: background 0.2s, transform 0.1s;
 }
-.button:hover {
+
+.button:hover:not(:disabled) {
   background: linear-gradient(90deg, #1e40af 0%, #0097a7 100%);
   transform: translateY(-2px) scale(1.03);
+}
+
+.button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.historySection {
+  margin-top: 32px;
+}
+
+.historySection h2 {
+  margin-bottom: 16px;
+  color: #374151;
+  font-size: 1.2rem;
 }
 
 .memoList {
@@ -65,30 +93,40 @@
 }
 
 .memoItem {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
   background: rgba(247,250,252,0.85);
   border-radius: 14px;
   box-shadow: 0 2px 8px rgba(0,188,212,0.08);
   padding: 18px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   animation: fadeIn 0.5s;
   border-left: 6px solid #00bcd4;
 }
 
-.memoTitle {
-  font-size: 1.15rem;
-  font-weight: 600;
-  color: #2563eb;
-  margin-bottom: 2px;
-  letter-spacing: 0.5px;
+.attendanceRecord {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: center;
 }
 
-.memoContent {
-  font-size: 1rem;
-  color: #2d3748;
-  word-break: break-all;
+.workDate {
+  font-weight: 600;
+  color: #2563eb;
+  font-size: 1.1rem;
+  grid-column: 1 / -1;
+  margin-bottom: 8px;
+}
+
+.attendanceRecord span:not(.workDate):not(.status) {
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.status {
+  font-weight: 600;
+  color: #059669;
+  grid-column: 1 / -1;
+  margin-top: 8px;
 }
 
 @keyframes fadeIn {
@@ -98,16 +136,26 @@
 
 @media (max-width: 600px) {
   .container {
-    padding: 14px;
+    padding: 16px;
     border-radius: 12px;
+    margin: 16px;
   }
+  
   .h1 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
-  .form {
-    gap: 10px;
+  
+  .buttonSection {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
-  .memoItem {
-    padding: 10px;
+  
+  .todayInfo {
+    grid-template-columns: 1fr;
+  }
+  
+  .attendanceRecord {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 }
