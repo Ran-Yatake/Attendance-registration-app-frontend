@@ -18,6 +18,8 @@ export default function AttendancePage() {
   const [attendances, setAttendances] = useState<Attendance[]>([])
   const [todayAttendance, setTodayAttendance] = useState<Attendance | null>(null)
   const [userId, setUserId] = useState<string | null>(null)
+  const [editingAttendance, setEditingAttendance] = useState<Attendance | null>(null)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const router = useRouter();
 
   useEffect(() => {
@@ -149,6 +151,74 @@ export default function AttendancePage() {
     });
   };
 
+  // 編集モーダルを開く
+  const openEditModal = (attendance: Attendance) => {
+    setEditingAttendance({ ...attendance });
+    setIsEditModalOpen(true);
+  };
+
+  // 編集モーダルを閉じる
+  const closeEditModal = () => {
+    setEditingAttendance(null);
+    setIsEditModalOpen(false);
+  };
+
+  // 勤怠記録を更新
+  const updateAttendance = async () => {
+    if (!editingAttendance) return;
+    
+    try {
+      await axios.put(`http://localhost:8080/api/attendance/${editingAttendance.id}`, {
+        startTime: editingAttendance.startTime,
+        breakStartTime: editingAttendance.breakStartTime,
+        breakEndTime: editingAttendance.breakEndTime,
+        endTime: editingAttendance.endTime,
+        status: editingAttendance.status
+      });
+      
+      await fetchAttendances();
+      if (todayAttendance && todayAttendance.id === editingAttendance.id) {
+        await fetchTodayAttendance();
+      }
+      closeEditModal();
+      alert("勤怠記録を更新しました");
+    } catch (error) {
+      alert("更新に失敗しました");
+    }
+  };
+
+  // 勤怠記録を削除
+  const deleteAttendance = async (id: number) => {
+    if (!confirm("この勤怠記録を削除しますか？")) return;
+    
+    try {
+      await axios.delete(`http://localhost:8080/api/attendance/${id}`);
+      await fetchAttendances();
+      if (todayAttendance && todayAttendance.id === id) {
+        setTodayAttendance(null);
+      }
+      alert("勤怠記録を削除しました");
+    } catch (error) {
+      alert("削除に失敗しました");
+    }
+  };
+
+  // 時間フォーマット関数（編集用）
+  const formatTimeForInput = (timeString?: string) => {
+    if (!timeString) return "";
+    return new Date(timeString).toISOString().slice(0, 16);
+  };
+
+  // 編集フォームの値更新
+  const updateEditForm = (field: string, value: string) => {
+    if (!editingAttendance) return;
+    
+    setEditingAttendance({
+      ...editingAttendance,
+      [field]: value ? new Date(value).toISOString() : null
+    });
+  };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.h1}>勤怠登録アプリ</h1>
@@ -213,11 +283,97 @@ export default function AttendancePage() {
                 <span>休憩: {formatTime(attendance.breakStartTime)} - {formatTime(attendance.breakEndTime)}</span>
                 <span>退勤: {formatTime(attendance.endTime)}</span>
                 <span className={styles.status}>状況: {attendance.status}</span>
+                <div className={styles.actionButtons}>
+                  <button 
+                    className={styles.editButton} 
+                    onClick={() => openEditModal(attendance)}
+                  >
+                    編集
+                  </button>
+                  <button 
+                    className={styles.deleteButton} 
+                    onClick={() => deleteAttendance(attendance.id)}
+                  >
+                    削除
+                  </button>
+                </div>
               </div>
             </li>
           ))}
         </ul>
       </div>
+
+      {/* 編集モーダル */}
+      {isEditModalOpen && editingAttendance && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modal}>
+            <h3>勤怠記録編集</h3>
+            <div className={styles.editForm}>
+              <label>
+                出勤時間:
+                <input
+                  type="datetime-local"
+                  value={formatTimeForInput(editingAttendance.startTime)}
+                  onChange={(e) => updateEditForm('startTime', e.target.value)}
+                  className={styles.timeInput}
+                />
+              </label>
+              
+              <label>
+                休憩開始:
+                <input
+                  type="datetime-local"
+                  value={formatTimeForInput(editingAttendance.breakStartTime)}
+                  onChange={(e) => updateEditForm('breakStartTime', e.target.value)}
+                  className={styles.timeInput}
+                />
+              </label>
+              
+              <label>
+                休憩終了:
+                <input
+                  type="datetime-local"
+                  value={formatTimeForInput(editingAttendance.breakEndTime)}
+                  onChange={(e) => updateEditForm('breakEndTime', e.target.value)}
+                  className={styles.timeInput}
+                />
+              </label>
+              
+              <label>
+                退勤時間:
+                <input
+                  type="datetime-local"
+                  value={formatTimeForInput(editingAttendance.endTime)}
+                  onChange={(e) => updateEditForm('endTime', e.target.value)}
+                  className={styles.timeInput}
+                />
+              </label>
+              
+              <label>
+                状況:
+                <select
+                  value={editingAttendance.status}
+                  onChange={(e) => setEditingAttendance({...editingAttendance, status: e.target.value})}
+                  className={styles.statusSelect}
+                >
+                  <option value="WORKING">勤務中</option>
+                  <option value="ON_BREAK">休憩中</option>
+                  <option value="FINISHED">退勤済み</option>
+                </select>
+              </label>
+            </div>
+            
+            <div className={styles.modalActions}>
+              <button className={styles.saveButton} onClick={updateAttendance}>
+                保存
+              </button>
+              <button className={styles.cancelButton} onClick={closeEditModal}>
+                キャンセル
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <button
         onClick={() => {
