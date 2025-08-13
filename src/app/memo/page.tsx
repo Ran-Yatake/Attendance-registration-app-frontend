@@ -14,12 +14,23 @@ type Attendance = {
   status: string; 
 }
 
+type Notice = {
+  id: number;
+  title: string;
+  content: string;
+  isActive: boolean;
+  createdAt: string;
+  startDate?: string;
+  endDate?: string;
+}
+
 export default function AttendancePage() {
   const [attendances, setAttendances] = useState<Attendance[]>([])
   const [todayAttendance, setTodayAttendance] = useState<Attendance | null>(null)
   const [userId, setUserId] = useState<string | null>(null)
   const [editingAttendance, setEditingAttendance] = useState<Attendance | null>(null)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  const [notices, setNotices] = useState<Notice[]>([])
   const router = useRouter();
 
   useEffect(() => {
@@ -50,6 +61,7 @@ export default function AttendancePage() {
         setUserId(data.Username);
         fetchAttendances(data.Username);
         fetchTodayAttendance(data.Username);
+        fetchNotices(); // お知らせも取得
       } else {
         alert("認証エラー");
         localStorage.removeItem("access_token");
@@ -82,6 +94,16 @@ export default function AttendancePage() {
       setTodayAttendance(res.data);
     } catch {
       setTodayAttendance(null);
+    }
+  };
+
+  // お知らせ取得
+  const fetchNotices = async () => {
+    try {
+      const res = await axios.get(`http://localhost:8080/api/notices/active`);
+      setNotices(res.data || []);
+    } catch {
+      setNotices([]);
     }
   };
 
@@ -222,6 +244,22 @@ export default function AttendancePage() {
   return (
     <div className={styles.container}>
       <h1 className={styles.h1}>勤怠登録アプリ</h1>
+      
+      {/* お知らせセクション */}
+      {notices.length > 0 && (
+        <div className={styles.noticeSection}>
+          <h2>お知らせ</h2>
+          {notices.map(notice => (
+            <div key={notice.id} className={styles.noticeItem}>
+              <h3 className={styles.noticeTitle}>{notice.title}</h3>
+              <p className={styles.noticeContent}>{notice.content}</p>
+              <span className={styles.noticeDate}>
+                {new Date(notice.createdAt).toLocaleDateString("ja-JP")}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
       
       {/* 今日の勤怠状況 */}
       <div className={styles.todaySection}>
