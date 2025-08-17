@@ -76,7 +76,7 @@ export default function LoginPage() {
               type="button"
               className={`${styles.loginBtn} ${styles.loginBtnSecondary}`}
               onClick={() => router.push("/signup")}
-            >
+            >@
               サインアップ
             </button>
           </div>
