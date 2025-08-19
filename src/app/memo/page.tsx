@@ -243,7 +243,15 @@ export default function AttendancePage() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.h1}>勤怠登録アプリ</h1>
+      <div className={styles.pageHeader}>
+        <h1 className={styles.h1}>勤怠登録アプリ</h1>
+        <button 
+          className={styles.expenseButton} 
+          onClick={() => router.push("/expense")}
+        >
+          経費申請
+        </button>
+      </div>
       
       {/* お知らせセクション */}
       {notices.length > 0 && (

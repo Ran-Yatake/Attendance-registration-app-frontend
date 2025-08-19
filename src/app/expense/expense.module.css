@@ -1,0 +1,343 @@
+.container {
+  max-width: 800px;
+  margin: 48px auto;
+  padding: 32px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(44,62,80,0.15);
+  backdrop-filter: blur(8px);
+  font-family: 'Segoe UI', 'Noto Sans JP', Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.h1 {
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: #2563eb;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(37,99,235,0.08);
+  margin: 0;
+}
+
+.backButton {
+  padding: 8px 16px;
+  background: #6b7280;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+}
+
+.backButton:hover {
+  background: #4b5563;
+}
+
+.createButton {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(90deg, #10b981 0%, #047857 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-bottom: 24px;
+  transition: transform 0.1s;
+}
+
+.createButton:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.expenseList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.expenseItem {
+  background: rgba(247,250,252,0.85);
+  border-radius: 16px;
+  padding: 20px;
+  border-left: 6px solid #10b981;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.expenseHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.expenseDate {
+  font-weight: 600;
+  color: #374151;
+  font-size: 1.1rem;
+}
+
+.status {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.status.pending {
+  background: #fbbf24;
+  color: #78350f;
+}
+
+.status.approved {
+  background: #10b981;
+  color: white;
+}
+
+.status.rejected {
+  background: #ef4444;
+  color: white;
+}
+
+.expenseDetails {
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.route {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1e40af;
+  margin-bottom: 8px;
+}
+
+.method, .purpose {
+  color: #4b5563;
+  margin-bottom: 4px;
+}
+
+.amount {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #059669;
+  margin: 8px 0;
+}
+
+.description {
+  color: #6b7280;
+  font-style: italic;
+  margin-top: 8px;
+}
+
+.receipt {
+  color: #7c2d12;
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 12px;
+}
+
+.editButton, .deleteButton {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.editButton {
+  background: #3b82f6;
+  color: white;
+}
+
+.editButton:hover {
+  background: #2563eb;
+}
+
+.deleteButton {
+  background: #ef4444;
+  color: white;
+}
+
+.deleteButton:hover {
+  background: #dc2626;
+}
+
+/* モーダル関連 */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal h3 {
+  margin: 0 0 24px 0;
+  color: #374151;
+  font-size: 1.4rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.input, .select, .textarea {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.input:focus, .select:focus, .textarea:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.1);
+}
+
+.textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.checkboxLabel {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkboxLabel input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+}
+
+.modalActions {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+}
+
+.saveButton, .cancelButton {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.saveButton {
+  background: #10b981;
+  color: white;
+}
+
+.saveButton:hover {
+  background: #059669;
+}
+
+.cancelButton {
+  background: #6b7280;
+  color: white;
+}
+
+.cancelButton:hover {
+  background: #4b5563;
+}
+
+.logoutButton {
+  width: 100%;
+  padding: 12px;
+  background: #6b7280;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 32px;
+  transition: background-color 0.2s;
+}
+
+.logoutButton:hover {
+  background: #4b5563;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+    margin: 16px;
+  }
+
+  .header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .h1 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .expenseHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .actionButtons {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .modal {
+    padding: 20px;
+    width: 95%;
+  }
+
+  .modalActions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .saveButton, .cancelButton {
+    width: 100%;
+  }
+}

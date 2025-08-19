@@ -9,14 +9,35 @@
   font-family: 'Segoe UI', 'Noto Sans JP', Arial, sans-serif;
 }
 
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
 .h1 {
-  text-align: center;
   font-size: 2.3rem;
   font-weight: 700;
-  margin-bottom: 32px;
   color: #2563eb;
   letter-spacing: 1px;
   text-shadow: 0 2px 8px rgba(37,99,235,0.08);
+  margin: 0;
+}
+
+.expenseButton {
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #10b981 0%, #047857 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.expenseButton:hover {
+  transform: translateY(-2px) scale(1.05);
 }
 
 .noticeSection {
@@ -314,8 +335,20 @@
     margin: 16px;
   }
   
+  .pageHeader {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  
   .h1 {
     font-size: 1.8rem;
+    text-align: center;
+  }
+  
+  .expenseButton {
+    align-self: center;
+    width: auto;
   }
   
   .noticeSection {
