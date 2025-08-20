@@ -36,18 +36,29 @@ export default function ExpenseReportPage() {
   const router = useRouter();
 
   useEffect(() => {
-    getUserInfo();
+    // クライアントサイドでのみ実行
+    if (typeof window !== 'undefined') {
+      getUserInfo();
+    }
   }, [])
 
   // ユーザー情報取得
   const getUserInfo = async () => {
+    // ブラウザ環境でのみlocalStorageにアクセス
+    if (typeof window === 'undefined') {
+      return;
+    }
+    
     const access_token = localStorage.getItem("access_token");
+    console.log("Access token:", access_token ? "存在" : "なし"); // デバッグログ
+    
     if (!access_token) {
       alert("ログインが必要です。");
-      router.push("/");
+      router.push("/login");
       return;
     }
     try {
+      console.log("Cognitoへのリクエスト開始"); // デバッグログ
       const res = await axios.post(
         "https://cognito-idp.ap-northeast-1.amazonaws.com/",
         { AccessToken: access_token }, 
@@ -58,6 +69,7 @@ export default function ExpenseReportPage() {
           }
         }
       );
+      console.log("Cognitoからの応答:", res.data); // デバッグログ
       const data = res.data;
       if (data.Username) {
         setUserId(data.Username);
@@ -65,11 +77,25 @@ export default function ExpenseReportPage() {
       } else {
         alert("認証エラー");
         localStorage.removeItem("access_token");
-        router.push("/");
+        router.push("/login");
       }
     } catch (error) {
-      alert("API通信エラー");
-      console.error(error);
+      console.error("API通信エラー詳細:", error);
+      if (axios.isAxiosError(error)) {
+        console.error("エラーレスポンス:", error.response?.data);
+        console.error("エラーステータス:", error.response?.status);
+        console.error("エラーメッセージ:", error.message);
+        
+        if (error.response?.status === 400) {
+          alert("認証トークンが無効です。再ログインしてください。");
+          localStorage.removeItem("access_token");
+          router.push("/login");
+        } else {
+          alert(`API通信エラー: ${error.message}`);
+        }
+      } else {
+        alert("予期しないエラーが発生しました");
+      }
     }
   };
 
@@ -202,7 +228,7 @@ export default function ExpenseReportPage() {
     <div className={styles.container}>
       <div className={styles.header}>
         <h1 className={styles.h1}>経費申請</h1>
-        <button className={styles.backButton} onClick={() => router.push("/memo")}>
+        <button className={styles.backButton} onClick={() => router.push("/attendance")}>
           勤怠画面に戻る
         </button>
       </div>

@@ -1,0 +1,417 @@
+.container {
+  max-width: 600px;
+  margin: 48px auto;
+  padding: 32px;
+  background: rgba(255,255,255,0.7);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(44,62,80,0.15);
+  backdrop-filter: blur(8px);
+  font-family: 'Segoe UI', 'Noto Sans JP', Arial, sans-serif;
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.h1 {
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: #2563eb;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 8px rgba(37,99,235,0.08);
+  margin: 0;
+}
+
+.headerButtons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.expenseButton, .profileButton {
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s;
+  font-size: 14px;
+}
+
+.expenseButton {
+  background: linear-gradient(90deg, #10b981 0%, #047857 100%);
+}
+
+.profileButton {
+  background: linear-gradient(90deg, #8b5cf6 0%, #7c3aed 100%);
+}
+
+.expenseButton:hover, .profileButton:hover {
+  transform: translateY(-2px) scale(1.05);
+}
+
+.noticeSection {
+  background: rgba(59, 130, 246, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  border-left: 4px solid #3b82f6;
+}
+
+.noticeSection h2 {
+  margin: 0 0 16px 0;
+  color: #1e40af;
+  font-size: 1.2rem;
+}
+
+.noticeItem {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-left: 3px solid #3b82f6;
+}
+
+.noticeItem:last-child {
+  margin-bottom: 0;
+}
+
+.noticeTitle {
+  margin: 0 0 8px 0;
+  color: #1e40af;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.noticeContent {
+  margin: 0 0 8px 0;
+  color: #374151;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.noticeDate {
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.todaySection {
+  background: rgba(34, 197, 94, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  border-left: 4px solid #22c55e;
+}
+
+.todaySection h2 {
+  margin: 0 0 16px 0;
+  color: #16a34a;
+  font-size: 1.2rem;
+}
+
+.todayInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.todayInfo p {
+  margin: 4px 0;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.buttonSection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 36px;
+}
+
+.button {
+  padding: 16px;
+  background: linear-gradient(90deg, #2563eb 0%, #00bcd4 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.10);
+  transition: background 0.2s, transform 0.1s;
+}
+
+.button:hover:not(:disabled) {
+  background: linear-gradient(90deg, #1e40af 0%, #0097a7 100%);
+  transform: translateY(-2px) scale(1.03);
+}
+
+.button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.historySection {
+  margin-top: 32px;
+}
+
+.historySection h2 {
+  margin-bottom: 16px;
+  color: #374151;
+  font-size: 1.2rem;
+}
+
+.memoList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.memoItem {
+  background: rgba(247,250,252,0.85);
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0,188,212,0.08);
+  padding: 18px;
+  margin-bottom: 16px;
+  animation: fadeIn 0.5s;
+  border-left: 6px solid #00bcd4;
+}
+
+.attendanceRecord {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.workDate {
+  font-weight: 600;
+  color: #2563eb;
+  font-size: 1.1rem;
+  grid-column: 1 / -1;
+  margin-bottom: 8px;
+}
+
+.attendanceRecord span:not(.workDate):not(.status) {
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.status {
+  font-weight: 600;
+  color: #059669;
+  grid-column: 1 / -1;
+  margin-top: 8px;
+}
+
+.actionButtons {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.editButton, .deleteButton {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.editButton {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.editButton:hover {
+  background-color: #2563eb;
+}
+
+.deleteButton {
+  background-color: #ef4444;
+  color: white;
+}
+
+.deleteButton:hover {
+  background-color: #dc2626;
+}
+
+/* モーダル関連 */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal h3 {
+  margin: 0 0 20px 0;
+  color: #374151;
+  font-size: 1.3rem;
+}
+
+.editForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.editForm label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.timeInput, .statusSelect {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.timeInput:focus, .statusSelect:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+}
+
+.modalActions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.saveButton, .cancelButton {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.saveButton {
+  background-color: #10b981;
+  color: white;
+}
+
+.saveButton:hover {
+  background-color: #059669;
+}
+
+.cancelButton {
+  background-color: #6b7280;
+  color: white;
+}
+
+.cancelButton:hover {
+  background-color: #4b5563;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 16px;
+    border-radius: 12px;
+    margin: 16px;
+  }
+  
+  .pageHeader {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  
+  .h1 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+  
+  .expenseButton {
+    align-self: center;
+    width: auto;
+  }
+  
+  .noticeSection {
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+
+  .noticeItem {
+    padding: 12px;
+  }
+
+  .noticeTitle {
+    font-size: 1rem;
+  }
+  
+  .buttonSection {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .todayInfo {
+    grid-template-columns: 1fr;
+  }
+  
+  .attendanceRecord {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .actionButtons {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .modal {
+    width: 95%;
+    padding: 16px;
+    margin: 16px;
+  }
+
+  .modalActions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .saveButton, .cancelButton {
+    width: 100%;
+  }
+}

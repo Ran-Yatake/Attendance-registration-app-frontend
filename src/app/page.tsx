@@ -1,87 +1,76 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import styles from "./login.module.css";
+import styles from "./page.module.css";
 
-const client_id = "4o4aep13lvfknksuasha3h602u";
-const tokenUrl = "https://cognito-idp.ap-northeast-1.amazonaws.com/";
-
-export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export default function HomePage() {
   const router = useRouter();
 
-  // ログイン処理
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      const res = await fetch(tokenUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-amz-json-1.1",
-          "X-Amz-Target": "AWSCognitoIdentityProviderService.InitiateAuth"
-        },
-        body: JSON.stringify({
-          AuthFlow: "USER_PASSWORD_AUTH",
-          ClientId: client_id,
-          AuthParameters: {
-            USERNAME: email,
-            PASSWORD: password
-          }
-        })
-      });
-
-      const data = await res.json();
-      if (data.AuthenticationResult?.AccessToken) {
-        localStorage.setItem("access_token", data.AuthenticationResult.AccessToken);
-        router.push("/memo");
-      } else {
-        alert("ログイン失敗");
-        console.log(data);
+  // 既にログインしている場合は勤怠ページにリダイレクト
+  useEffect(() => {
+    // クライアントサイドでのみ実行
+    if (typeof window !== 'undefined') {
+      const access_token = localStorage.getItem("access_token");
+      if (access_token) {
+        router.push("/attendance");
       }
-    } catch (error) {
-      alert("ログインエラー");
-      console.error(error);
     }
-  };
+  }, [router]);
 
   return (
-    <main className={styles.loginMain}>
-      <div className={styles.loginCard}>
-        <h1 className={styles.loginTitle}>Cognito ログイン</h1>
-        <form onSubmit={handleSubmit} className={styles.loginForm}>
-          <input
-            type="email"
-            placeholder="メールアドレス"
-            required
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            className={styles.loginInput}
-          />
-          <input
-            type="password"
-            placeholder="パスワード"
-            required
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            className={styles.loginInput}
-          />
-          <div className={styles.loginActions}>
-            <button type="submit" className={`${styles.loginBtn} ${styles.loginBtnPrimary}`}>
-              ログイン
-            </button>
-            <button
-              type="button"
-              className={`${styles.loginBtn} ${styles.loginBtnSecondary}`}
-              onClick={() => router.push("/signup")}
-            >@
-              サインアップ
-            </button>
+    <main className={styles.main}>
+      <div className={styles.hero}>
+        <h1 className={styles.title}>勤怠登録アプリ</h1>
+        <p className={styles.subtitle}>
+          効率的な勤怠管理で、より良い働き方を実現しましょう
+        </p>
+        
+        <div className={styles.features}>
+          <div className={styles.feature}>
+            <div className={styles.featureIcon}>🕒</div>
+            <h3>簡単な勤怠記録</h3>
+            <p>ワンクリックで出退勤の記録が可能</p>
           </div>
-        </form>
+          
+          <div className={styles.feature}>
+            <div className={styles.featureIcon}>📊</div>
+            <h3>経費報告</h3>
+            <p>交通費などの経費申請も簡単に管理</p>
+          </div>
+          
+          <div className={styles.feature}>
+            <div className={styles.featureIcon}>👤</div>
+            <h3>プロフィール管理</h3>
+            <p>個人情報や連絡先の一元管理</p>
+          </div>
+          
+          <div className={styles.feature}>
+            <div className={styles.featureIcon}>📢</div>
+            <h3>お知らせ機能</h3>
+            <p>重要な連絡事項をリアルタイムで確認</p>
+          </div>
+        </div>
+
+        <div className={styles.actions}>
+          <button 
+            className={styles.loginButton}
+            onClick={() => router.push("/login")}
+          >
+            ログイン
+          </button>
+          <button 
+            className={styles.signupButton}
+            onClick={() => router.push("/signup")}
+          >
+            新規登録
+          </button>
+        </div>
       </div>
+      
+      <footer className={styles.footer}>
+        <p>&copy; 2025 勤怠登録アプリ. All rights reserved.</p>
+      </footer>
     </main>
   );
 }
