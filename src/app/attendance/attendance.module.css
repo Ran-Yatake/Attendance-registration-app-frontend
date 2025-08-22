@@ -45,6 +45,23 @@
   font-size: 14px;
 }
 
+.adminButton {
+  padding: 10px 20px;
+  background: linear-gradient(90deg, #f59e42 0%, #fbbf24 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s;
+  font-size: 14px;
+  margin-left: 8px;
+}
+.adminButton:hover {
+  transform: translateY(-2px) scale(1.05);
+  background: linear-gradient(90deg, #fbbf24 0%, #f59e42 100%);
+}
+
 .expenseButton {
   background: linear-gradient(90deg, #10b981 0%, #047857 100%);
 }

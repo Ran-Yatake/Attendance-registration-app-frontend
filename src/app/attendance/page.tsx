@@ -31,6 +31,7 @@ export default function AttendancePage() {
   const [editingAttendance, setEditingAttendance] = useState<Attendance | null>(null)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [notices, setNotices] = useState<Notice[]>([])
+  const [isAdmin, setIsAdmin] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -56,7 +57,7 @@ export default function AttendancePage() {
       return;
     }
     try {
-      console.log("Cognitoへのリクエスト開始"); // デバッグログ
+      // CognitoでuserId取得
       const res = await axios.post(
         "https://cognito-idp.ap-northeast-1.amazonaws.com/",
         { AccessToken: access_token }, 
@@ -67,10 +68,12 @@ export default function AttendancePage() {
           }
         }
       );
-      console.log("Cognitoからの応答:", res.data); // デバッグログ
       const data = res.data;
       if (data.Username) {
         setUserId(data.Username);
+        // ユーザープロフィール取得
+        const profileRes = await axios.get(`http://localhost:8080/api/user-profile?userId=${data.Username}`);
+        setIsAdmin(profileRes.data.admin === true);
         fetchAttendances(data.Username);
         fetchTodayAttendance(data.Username);
         fetchNotices(); // お知らせも取得
@@ -82,10 +85,6 @@ export default function AttendancePage() {
     } catch (error) {
       console.error("API通信エラー詳細:", error);
       if (axios.isAxiosError(error)) {
-        console.error("エラーレスポンス:", error.response?.data);
-        console.error("エラーステータス:", error.response?.status);
-        console.error("エラーメッセージ:", error.message);
-        
         if (error.response?.status === 400) {
           alert("認証トークンが無効です。再ログインしてください。");
           localStorage.removeItem("access_token");
@@ -284,6 +283,14 @@ export default function AttendancePage() {
           >
             プロフィール設定
           </button>
+          {isAdmin && (
+            <button
+              className={styles.adminButton}
+              onClick={() => router.push("/admin")}
+            >
+              管理者画面
+            </button>
+          )}
         </div>
       </div>
       
