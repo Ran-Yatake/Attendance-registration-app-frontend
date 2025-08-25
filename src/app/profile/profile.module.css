@@ -1,63 +1,66 @@
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  max-width: 1200px;
+  margin: 48px auto;
+  padding: 40px;
+  min-height: calc(100vh - 96px);
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
   color: white;
+  border-radius: 20px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 20px;
 }
 
 .h1 {
   margin: 0;
-  font-size: 28px;
+  font-size: 2.5rem;
   font-weight: 600;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .backButton {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.15);
   border: 2px solid rgba(255, 255, 255, 0.3);
   color: white;
-  padding: 10px 20px;
+  padding: 12px 24px;
   border-radius: 25px;
   cursor: pointer;
   font-weight: 500;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
+  font-size: 1rem;
 }
 
 .backButton:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.25);
   border-color: rgba(255, 255, 255, 0.5);
   transform: translateY(-2px);
 }
 
 .loading {
   text-align: center;
-  padding: 50px;
-  font-size: 18px;
+  padding: 60px;
+  font-size: 1.2rem;
 }
 
 .form {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 20px;
-  padding: 30px;
-  margin-bottom: 20px;
+  padding: 40px;
+  margin-bottom: 30px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .section {
-  margin-bottom: 35px;
+  margin-bottom: 40px;
 }
 
 .section:last-child {
@@ -65,31 +68,34 @@
 }
 
 .sectionTitle {
-  font-size: 20px;
+  font-size: 1.4rem;
   font-weight: 600;
-  margin: 0 0 20px 0;
-  padding-bottom: 10px;
+  margin: 0 0 25px 0;
+  padding-bottom: 12px;
   border-bottom: 2px solid rgba(255, 255, 255, 0.3);
   color: #f0f0f0;
 }
 
 .row {
-  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin-bottom: 25px;
 }
 
 .label {
   display: block;
   font-weight: 500;
-  margin-bottom: 8px;
-  font-size: 14px;
+  margin-bottom: 10px;
+  font-size: 1rem;
   color: #f0f0f0;
 }
 
 .input, .select {
   width: 100%;
-  padding: 12px 16px;
+  padding: 15px 18px;
   border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 16px;
   background: rgba(255, 255, 255, 0.9);
   color: #333;
@@ -101,11 +107,11 @@
   outline: none;
   border-color: rgba(255, 255, 255, 0.6);
   background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
 }
 
 .input::placeholder {
-  color: #999;
+  color: var(--gray-400);
 }
 
 .select {
@@ -114,58 +120,70 @@
 
 .actions {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 40px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
 }
 
 .saveButton {
-  background: linear-gradient(45deg, #4CAF50, #45a049);
+  background: var(--success-green);
   border: none;
   color: white;
-  padding: 15px 40px;
+  padding: 18px 45px;
   border-radius: 25px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 1.1rem;
   font-weight: 600;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.3);
 }
 
 .saveButton:hover {
+  background: #047857;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
 }
 
 .saveButton:disabled {
-  background: #ccc;
+  background: var(--gray-400);
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
 }
 
 .logoutButton {
-  background: rgba(255, 82, 82, 0.8);
-  border: 2px solid rgba(255, 82, 82, 0.6);
+  background: rgba(220, 38, 38, 0.8);
+  border: 2px solid rgba(220, 38, 38, 0.6);
   color: white;
-  padding: 12px 25px;
+  padding: 15px 30px;
   border-radius: 25px;
   cursor: pointer;
   font-weight: 500;
   transition: all 0.3s ease;
-  display: block;
-  margin: 0 auto;
   backdrop-filter: blur(10px);
+  font-size: 1rem;
 }
 
 .logoutButton:hover {
-  background: rgba(255, 82, 82, 0.9);
-  border-color: rgba(255, 82, 82, 0.8);
+  background: var(--error-red);
+  border-color: var(--error-red);
   transform: translateY(-2px);
 }
 
-/* スマートフォン対応 */
+/* 1200px以下でのレイアウト調整 */
+@media (max-width: 1200px) {
+  .row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* タブレット以下でのモバイル対応 */
 @media (max-width: 768px) {
   .container {
-    padding: 15px;
+    margin: 20px;
+    padding: 25px;
   }
 
   .header {
@@ -174,37 +192,30 @@
   }
 
   .h1 {
-    font-size: 24px;
+    font-size: 2rem;
   }
 
   .form {
-    padding: 20px;
+    padding: 25px;
   }
 
-  .input, .select {
-    font-size: 16px; /* iOS Safariでズームを防ぐ */
+  .row {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: center;
   }
 
   .saveButton {
     width: 100%;
     max-width: 300px;
   }
-}
 
-@media (max-width: 480px) {
-  .container {
-    padding: 10px;
-  }
-
-  .h1 {
-    font-size: 22px;
-  }
-
-  .form {
-    padding: 15px;
-  }
-
-  .sectionTitle {
-    font-size: 18px;
+  .logoutButton {
+    width: 100%;
+    max-width: 300px;
   }
 }

@@ -1,62 +1,64 @@
 .loginMain {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 40px;
 }
 
 .loginCard {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 40px;
+  background: rgba(255, 255, 255, 0.98);
+  padding: 50px 60px;
   border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .loginTitle {
   text-align: center;
-  margin-bottom: 30px;
-  color: #333;
-  font-size: 28px;
+  margin-bottom: 40px;
+  color: var(--gray-800);
+  font-size: 32px;
   font-weight: 600;
 }
 
 .loginForm {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
 }
 
 .loginInput {
-  padding: 15px;
-  border: 2px solid #e1e5e9;
-  border-radius: 10px;
+  padding: 18px 20px;
+  border: 2px solid var(--gray-200);
+  border-radius: 12px;
   font-size: 16px;
-  transition: border-color 0.3s;
+  transition: all 0.3s;
+  background: var(--gray-50);
 }
 
 .loginInput:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+  background: white;
 }
 
 .loginActions {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-top: 10px;
+  gap: 18px;
+  margin-top: 15px;
 }
 
 .loginBtn {
-  padding: 15px;
+  padding: 18px 20px;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
@@ -64,42 +66,48 @@
 }
 
 .loginBtnPrimary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--primary-blue);
   color: white;
 }
 
 .loginBtnPrimary:hover {
+  background: var(--primary-blue-dark);
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
 }
 
 .loginBtnSecondary {
   background: transparent;
-  color: #667eea;
-  border: 2px solid #667eea;
+  color: var(--primary-blue);
+  border: 2px solid var(--primary-blue);
 }
 
 .loginBtnSecondary:hover {
-  background: #667eea;
+  background: var(--primary-blue);
   color: white;
   transform: translateY(-2px);
 }
 
-/* スマートフォン対応 */
-@media (max-width: 480px) {
+/* 1200px以下でのレイアウト調整 */
+@media (max-width: 1200px) {
+  .loginCard {
+    max-width: 450px;
+    padding: 40px 50px;
+  }
+}
+
+/* タブレット以下でのみモバイル対応 */
+@media (max-width: 768px) {
   .loginMain {
-    padding: 15px;
+    padding: 20px;
   }
   
   .loginCard {
-    padding: 30px 20px;
+    padding: 35px 25px;
+    max-width: 400px;
   }
   
   .loginTitle {
-    font-size: 24px;
-  }
-  
-  .loginInput, .loginBtn {
-    font-size: 16px; /* iOS Safariでズームを防ぐ */
+    font-size: 28px;
   }
 }

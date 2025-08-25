@@ -1,107 +1,111 @@
 .main {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 40px;
   color: white;
 }
 
 .hero {
   text-align: center;
-  max-width: 1200px;
+  max-width: 1400px;
   width: 100%;
 }
 
 .title {
-  font-size: 4rem;
+  font-size: 5rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  background: linear-gradient(45deg, #ffffff, #e0e7ff);
+  background: linear-gradient(45deg, #ffffff, var(--secondary-blue));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .subtitle {
-  font-size: 1.25rem;
-  margin-bottom: 3rem;
-  opacity: 0.9;
+  font-size: 1.5rem;
+  margin-bottom: 4rem;
+  opacity: 0.95;
   font-weight: 300;
   line-height: 1.6;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .features {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-bottom: 3rem;
-  padding: 0 1rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem;
+  margin-bottom: 4rem;
+  padding: 0 2rem;
 }
 
 .feature {
   background: rgba(255, 255, 255, 0.1);
-  padding: 2rem;
+  padding: 2.5rem 2rem;
   border-radius: 20px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
+  text-align: center;
 }
 
 .feature:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
   background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
 }
 
 .featureIcon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  display: block;
 }
 
 .feature h3 {
-  font-size: 1.25rem;
+  font-size: 1.4rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
   color: #f8fafc;
 }
 
 .feature p {
-  opacity: 0.8;
+  opacity: 0.85;
   line-height: 1.5;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .actions {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
   justify-content: center;
-  flex-wrap: wrap;
 }
 
 .loginButton, .signupButton {
-  padding: 1rem 2.5rem;
-  font-size: 1.1rem;
+  padding: 1.2rem 3rem;
+  font-size: 1.2rem;
   font-weight: 600;
   border: none;
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 150px;
+  min-width: 180px;
 }
 
 .loginButton {
   background: rgba(255, 255, 255, 0.9);
-  color: #667eea;
+  color: var(--primary-blue);
 }
 
 .loginButton:hover {
   background: white;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .signupButton {
@@ -113,61 +117,59 @@
 .signupButton:hover {
   background: rgba(255, 255, 255, 0.1);
   border-color: white;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 .footer {
-  margin-top: 4rem;
+  margin-top: 5rem;
   text-align: center;
   opacity: 0.7;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
-/* スマートフォン対応 */
-@media (max-width: 768px) {
-  .main {
-    padding: 15px;
+/* 画面が小さい場合の調整（1200px以下） */
+@media (max-width: 1200px) {
+  .features {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
   }
   
   .title {
-    font-size: 2.5rem;
+    font-size: 4rem;
+  }
+}
+
+/* タブレット以下でのみモバイル対応 */
+@media (max-width: 768px) {
+  html {
+    min-width: unset;
+  }
+  
+  .main {
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 3rem;
   }
   
   .subtitle {
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
   }
   
   .features {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
-    margin-bottom: 2rem;
   }
   
   .feature {
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
   }
   
   .actions {
     flex-direction: column;
     align-items: center;
-  }
-  
-  .loginButton, .signupButton {
-    width: 200px;
-  }
-}
-
-@media (max-width: 480px) {
-  .title {
-    font-size: 2rem;
-  }
-  
-  .feature {
-    padding: 1rem;
-  }
-  
-  .featureIcon {
-    font-size: 2.5rem;
+    gap: 1rem;
   }
 }

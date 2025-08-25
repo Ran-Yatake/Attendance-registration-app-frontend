@@ -1,11 +1,11 @@
 .container {
-  max-width: 600px;
+  max-width: 1200px;
   margin: 48px auto;
-  padding: 32px;
-  background: rgba(255,255,255,0.7);
-  border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(44,62,80,0.15);
-  backdrop-filter: blur(8px);
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
   font-family: 'Segoe UI', 'Noto Sans JP', Arial, sans-serif;
 }
 
@@ -13,88 +13,81 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 20px;
 }
 
 .h1 {
-  font-size: 2.3rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  color: #2563eb;
+  color: var(--primary-blue);
   letter-spacing: 1px;
-  text-shadow: 0 2px 8px rgba(37,99,235,0.08);
+  text-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
   margin: 0;
 }
 
 .headerButtons {
   display: flex;
-  gap: 12px;
+  gap: 15px;
   align-items: center;
   flex-wrap: wrap;
 }
 
-.expenseButton, .profileButton {
-  padding: 10px 20px;
+.expenseButton, .profileButton, .adminButton, .logoutButton {
+  padding: 12px 24px;
   color: white;
   border: none;
   border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.1s;
+  transition: all 0.3s;
   font-size: 14px;
-}
-
-.adminButton {
-  padding: 10px 20px;
-  background: linear-gradient(90deg, #f59e42 0%, #fbbf24 100%);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.1s;
-  font-size: 14px;
-  margin-left: 8px;
-}
-.adminButton:hover {
-  transform: translateY(-2px) scale(1.05);
-  background: linear-gradient(90deg, #fbbf24 0%, #f59e42 100%);
 }
 
 .expenseButton {
-  background: linear-gradient(90deg, #10b981 0%, #047857 100%);
+  background: var(--success-green);
 }
 
 .profileButton {
-  background: linear-gradient(90deg, #8b5cf6 0%, #7c3aed 100%);
+  background: var(--primary-blue);
 }
 
-.expenseButton:hover, .profileButton:hover {
-  transform: translateY(-2px) scale(1.05);
+.adminButton {
+  background: var(--warning-orange);
+  margin-left: 8px;
+}
+
+.logoutButton {
+  background: var(--error-red);
+}
+
+.expenseButton:hover, .profileButton:hover, .adminButton:hover, .logoutButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
 .noticeSection {
-  background: rgba(59, 130, 246, 0.1);
+  background: rgba(37, 99, 235, 0.08);
   border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 24px;
-  border-left: 4px solid #3b82f6;
+  padding: 24px;
+  margin-bottom: 30px;
+  border-left: 4px solid var(--primary-blue);
 }
 
 .noticeSection h2 {
-  margin: 0 0 16px 0;
-  color: #1e40af;
-  font-size: 1.2rem;
+  margin: 0 0 18px 0;
+  color: var(--primary-blue);
+  font-size: 1.3rem;
 }
 
 .noticeItem {
   background: white;
   border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-left: 3px solid #3b82f6;
+  padding: 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border-left: 3px solid var(--primary-blue);
 }
 
 .noticeItem:last-child {
@@ -102,167 +95,175 @@
 }
 
 .noticeTitle {
-  margin: 0 0 8px 0;
-  color: #1e40af;
-  font-size: 1.1rem;
+  margin: 0 0 10px 0;
+  color: var(--primary-blue);
+  font-size: 1.15rem;
   font-weight: 600;
 }
 
 .noticeContent {
-  margin: 0 0 8px 0;
-  color: #374151;
-  line-height: 1.5;
+  margin: 0 0 10px 0;
+  color: var(--gray-700);
+  line-height: 1.6;
   white-space: pre-wrap;
 }
 
 .noticeDate {
-  font-size: 0.8rem;
-  color: #6b7280;
+  font-size: 0.85rem;
+  color: var(--gray-500);
   font-style: italic;
 }
 
 .todaySection {
-  background: rgba(34, 197, 94, 0.1);
+  background: rgba(5, 150, 105, 0.08);
   border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 24px;
-  border-left: 4px solid #22c55e;
+  padding: 24px;
+  margin-bottom: 30px;
+  border-left: 4px solid var(--success-green);
 }
 
 .todaySection h2 {
-  margin: 0 0 16px 0;
-  color: #16a34a;
-  font-size: 1.2rem;
+  margin: 0 0 18px 0;
+  color: var(--success-green);
+  font-size: 1.3rem;
 }
 
 .todayInfo {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 15px;
 }
 
 .todayInfo p {
-  margin: 4px 0;
-  font-size: 0.9rem;
-  color: #374151;
+  margin: 6px 0;
+  font-size: 1rem;
+  color: var(--gray-700);
+  font-weight: 500;
 }
 
 .buttonSection {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  margin-bottom: 36px;
+  gap: 20px;
+  margin-bottom: 40px;
 }
 
 .button {
-  padding: 16px;
-  background: linear-gradient(90deg, #2563eb 0%, #00bcd4 100%);
-  color: #fff;
+  padding: 20px;
+  background: var(--primary-blue);
+  color: white;
   border: none;
   border-radius: 12px;
   font-weight: bold;
   font-size: 1.1rem;
   cursor: pointer;
-  box-shadow: 0 2px 12px rgba(37,99,235,0.10);
-  transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.2);
+  transition: all 0.3s;
 }
 
 .button:hover:not(:disabled) {
-  background: linear-gradient(90deg, #1e40af 0%, #0097a7 100%);
-  transform: translateY(-2px) scale(1.03);
+  background: var(--primary-blue-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
 }
 
 .button:disabled {
-  background: #9ca3af;
+  background: var(--gray-400);
   cursor: not-allowed;
   transform: none;
 }
 
 .historySection {
-  margin-top: 32px;
+  margin-top: 40px;
 }
 
 .historySection h2 {
-  margin-bottom: 16px;
-  color: #374151;
-  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: var(--gray-800);
+  font-size: 1.4rem;
 }
 
 .memoList {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: grid;
+  gap: 20px;
 }
 
 .memoItem {
-  background: rgba(247,250,252,0.85);
-  border-radius: 14px;
-  box-shadow: 0 2px 8px rgba(0,188,212,0.08);
-  padding: 18px;
-  margin-bottom: 16px;
+  background: rgba(248, 250, 252, 0.9);
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  padding: 24px;
   animation: fadeIn 0.5s;
-  border-left: 6px solid #00bcd4;
+  border-left: 6px solid var(--primary-blue);
 }
 
 .attendanceRecord {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 12px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 15px;
   align-items: center;
 }
 
 .workDate {
   font-weight: 600;
-  color: #2563eb;
-  font-size: 1.1rem;
+  color: var(--primary-blue);
+  font-size: 1.2rem;
   grid-column: 1 / -1;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .attendanceRecord span:not(.workDate):not(.status) {
-  font-size: 0.9rem;
-  color: #374151;
+  font-size: 1rem;
+  color: var(--gray-700);
+  font-weight: 500;
 }
 
 .status {
   font-weight: 600;
-  color: #059669;
+  color: var(--success-green);
   grid-column: 1 / -1;
-  margin-top: 8px;
+  margin-top: 12px;
+  font-size: 1rem;
 }
 
 .actionButtons {
   grid-column: 1 / -1;
   display: flex;
-  gap: 8px;
-  margin-top: 12px;
+  gap: 10px;
+  margin-top: 15px;
 }
 
 .editButton, .deleteButton {
-  padding: 6px 12px;
+  padding: 8px 16px;
   border: none;
-  border-radius: 6px;
-  font-size: 0.8rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s;
+  font-weight: 500;
 }
 
 .editButton {
-  background-color: #3b82f6;
+  background-color: var(--primary-blue);
   color: white;
 }
 
 .editButton:hover {
-  background-color: #2563eb;
+  background-color: var(--primary-blue-dark);
+  transform: translateY(-1px);
 }
 
 .deleteButton {
-  background-color: #ef4444;
+  background-color: var(--error-red);
   color: white;
 }
 
 .deleteButton:hover {
-  background-color: #dc2626;
+  background-color: #b91c1c;
+  transform: translateY(-1px);
 }
 
 /* モーダル関連 */
@@ -281,154 +282,116 @@
 
 .modal {
   background: white;
-  border-radius: 12px;
-  padding: 24px;
-  max-width: 500px;
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 600px;
   width: 90%;
   max-height: 80vh;
   overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3);
 }
 
 .modal h3 {
-  margin: 0 0 20px 0;
-  color: #374151;
-  font-size: 1.3rem;
+  margin: 0 0 25px 0;
+  color: var(--gray-800);
+  font-size: 1.4rem;
 }
 
 .editForm {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-bottom: 20px;
+  gap: 20px;
+  margin-bottom: 25px;
 }
 
 .editForm label {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   font-weight: 500;
-  color: #374151;
+  color: var(--gray-700);
 }
 
 .timeInput, .statusSelect {
-  padding: 8px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  font-size: 0.9rem;
+  padding: 12px 16px;
+  border: 2px solid var(--gray-200);
+  border-radius: 8px;
+  font-size: 1rem;
 }
 
 .timeInput:focus, .statusSelect:focus {
   outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
 .modalActions {
   display: flex;
-  gap: 12px;
+  gap: 15px;
   justify-content: flex-end;
 }
 
 .saveButton, .cancelButton {
-  padding: 8px 16px;
+  padding: 12px 20px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.3s;
 }
 
 .saveButton {
-  background-color: #10b981;
+  background-color: var(--success-green);
   color: white;
 }
 
 .saveButton:hover {
-  background-color: #059669;
+  background-color: #047857;
+  transform: translateY(-1px);
 }
 
 .cancelButton {
-  background-color: #6b7280;
+  background-color: var(--gray-500);
   color: white;
 }
 
 .cancelButton:hover {
-  background-color: #4b5563;
+  background-color: var(--gray-600);
+  transform: translateY(-1px);
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(12px);}
-  to { opacity: 1; transform: translateY(0);}
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 600px) {
+/* タブレット以下でのモバイル対応 */
+@media (max-width: 768px) {
   .container {
-    padding: 16px;
-    border-radius: 12px;
-    margin: 16px;
-  }
-  
-  .pageHeader {
-    flex-direction: column;
-    gap: 16px;
-    align-items: stretch;
+    padding: 20px;
+    margin: 20px;
   }
   
   .h1 {
-    font-size: 1.8rem;
-    text-align: center;
-  }
-  
-  .expenseButton {
-    align-self: center;
-    width: auto;
-  }
-  
-  .noticeSection {
-    padding: 16px;
-    margin-bottom: 20px;
-  }
-
-  .noticeItem {
-    padding: 12px;
-  }
-
-  .noticeTitle {
-    font-size: 1rem;
-  }
-  
-  .buttonSection {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    font-size: 2rem;
   }
   
   .todayInfo {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
   
   .attendanceRecord {
     grid-template-columns: 1fr;
-    gap: 8px;
+    gap: 10px;
   }
-
-  .actionButtons {
-    flex-direction: column;
-    gap: 6px;
+  
+  .buttonSection {
+    grid-template-columns: 1fr;
+    gap: 15px;
   }
-
+  
   .modal {
     width: 95%;
-    padding: 16px;
-    margin: 16px;
-  }
-
-  .modalActions {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .saveButton, .cancelButton {
-    width: 100%;
+    padding: 20px;
   }
 }

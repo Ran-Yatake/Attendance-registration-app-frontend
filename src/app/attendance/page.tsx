@@ -291,6 +291,15 @@ export default function AttendancePage() {
               管理者画面
             </button>
           )}
+          <button
+            className={styles.logoutButton}
+            onClick={() => {
+              localStorage.removeItem("access_token");
+              router.push("/login");
+            }}
+          >
+            ログアウト
+          </button>
         </div>
       </div>
       
@@ -461,15 +470,6 @@ export default function AttendancePage() {
           </div>
         </div>
       )}
-
-      <button
-        onClick={() => {
-          localStorage.removeItem("access_token");
-          router.push("/login");
-        }}
-      >
-        ログアウト
-      </button>      
     </div>
   )
 }
